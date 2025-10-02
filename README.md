@@ -3,7 +3,7 @@ A simple web-based study planner that helps students organize study goals, manag
 Everything runs directly in your browser using local storage — no accounts or setup needed.
 
 ✨ Features :
-Study Goals – create, edit, delete goals with deadlines, priorities, and progress bars
+Study Goals – create, edit, delete goals with deadlines, priorities, and progress bars \N
 Tasks – add tasks linked to goals, mark completed or pending, filter by status
 Timeline – chronological view of goals, tasks, and reminders
 Reminders – notifications for study sessions, deadlines, breaks, and reviews
