@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Study Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-graduation-cap"></i> Smart Study Planner</h1>
+                <p>Organize your studies, track progress, and boost productivity</p>
+            </div>
+            
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs" role="tablist">
+            <button class="nav-btn active" data-tab="goals" role="tab" aria-selected="true" aria-controls="goals">
+                <i class="fas fa-target"></i> Study Goals
+            </button>
+            <button class="nav-btn" data-tab="tasks" role="tab" aria-selected="false" aria-controls="tasks">
+                <i class="fas fa-tasks"></i> Tasks
+            </button>
+            <button class="nav-btn" data-tab="timeline" role="tab" aria-selected="false" aria-controls="timeline">
+                <i class="fas fa-chart-line"></i> Timeline
+            </button>
+            <button class="nav-btn" data-tab="reminders" role="tab" aria-selected="false" aria-controls="reminders">
+                <i class="fas fa-bell"></i> Reminders
+            </button>
+            <button class="nav-btn" data-tab="stats" role="tab" aria-selected="false" aria-controls="stats">
+                <i class="fas fa-chart-bar"></i> Statistics
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Study Goals Tab -->
+            <section id="goals" class="tab-content active" role="tabpanel" aria-labelledby="goals-tab">
+                <div class="section-header">
+                    <h2>Study Goals</h2>
+                    <div class="header-actions">
+                        <div class="search-container">
+                            <input type="text" id="goalSearch" placeholder="Search goals..." class="search-input" aria-label="Search goals">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                        <button class="btn btn-primary" id="addGoalBtn" aria-label="Add new study goal">
+                            <i class="fas fa-plus"></i> Add Goal
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="goals-grid" id="goalsGrid" role="grid" aria-label="Study goals grid">
+                    <!-- Goals will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Tasks Tab -->
+            <section id="tasks" class="tab-content" role="tabpanel" aria-labelledby="tasks-tab">
+                <div class="section-header">
+                    <h2>Tasks</h2>
+                    <div class="header-actions">
+                        <div class="search-container">
+                            <input type="text" id="taskSearch" placeholder="Search tasks..." class="search-input" aria-label="Search tasks">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                        <button class="btn btn-primary" id="addTaskBtn" aria-label="Add new task">
+                            <i class="fas fa-plus"></i> Add Task
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="task-filters" role="group" aria-label="Task filters">
+                    <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+                    <button class="filter-btn" data-filter="pending" aria-pressed="false">Pending</button>
+                    <button class="filter-btn" data-filter="completed" aria-pressed="false">Completed</button>
+                    <button class="filter-btn" data-filter="overdue" aria-pressed="false">Overdue</button>
+                </div>
+                
+                <div class="tasks-list" id="tasksList" role="list" aria-label="Tasks list">
+                    <!-- Tasks will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Timeline Tab -->
+            <section id="timeline" class="tab-content" role="tabpanel" aria-labelledby="timeline-tab">
+                <div class="section-header">
+                    <h2>Progress Timeline</h2>
+                    <div class="timeline-controls">
+                        <button class="btn btn-secondary" id="exportDataBtn" aria-label="Export data">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="btn btn-secondary" id="importDataBtn" aria-label="Import data">
+                            <i class="fas fa-upload"></i> Import
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="timeline-container" id="timelineContainer" role="list" aria-label="Progress timeline">
+                    <!-- Timeline will be dynamically generated here -->
+                </div>
+            </section>
+
+            <!-- Reminders Tab -->
+            <section id="reminders" class="tab-content" role="tabpanel" aria-labelledby="reminders-tab">
+                <div class="section-header">
+                    <h2>Reminders</h2>
+                    <div class="header-actions">
+                        <div class="search-container">
+                            <input type="text" id="reminderSearch" placeholder="Search reminders..." class="search-input" aria-label="Search reminders">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                        <button class="btn btn-primary" id="addReminderBtn" aria-label="Add new reminder">
+                            <i class="fas fa-plus"></i> Add Reminder
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="reminders-list" id="remindersList" role="list" aria-label="Reminders list">
+                    <!-- Reminders will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Statistics Tab -->
+            <section id="stats" class="tab-content" role="tabpanel" aria-labelledby="stats-tab">
+                <div class="section-header">
+                    <h2>Study Statistics</h2>
+                    <div class="stats-controls">
+                        <button class="btn btn-secondary" id="refreshStatsBtn" aria-label="Refresh statistics">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="stats-grid" id="statsGrid">
+                    <!-- Statistics will be dynamically generated here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add/Edit Goal Modal -->
+    <div id="goalModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="goalModalTitle">Add Study Goal</h3>
+                <span class="close" id="closeGoalModal">&times;</span>
+            </div>
+            <form id="goalForm">
+                <div class="form-group">
+                    <label for="goalTitle">Goal Title</label>
+                    <input type="text" id="goalTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="goalDescription">Description</label>
+                    <textarea id="goalDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    
+                    <label for="goalDeadline">Deadline</label>
+                    <input type="date" id="goalDeadline" required>
+                </div>
+                <div class="form-group">
+                    <label for="goalPriority">Priority</label>
+                    <select id="goalPriority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="goalProgress">Progress (%)</label>
+                    <input type="range" id="goalProgress" min="0" max="100" value="0">
+                    <span id="progressValue">0%</span>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelGoal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Goal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Task Modal -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="taskModalTitle">Add Task</h3>
+                <span class="close" id="closeTaskModal">&times;</span>
+            </div>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskTitle">Task Title</label>
+                    <input type="text" id="taskTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="taskDescription">Description</label>
+                    <textarea id="taskDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="taskGoal">Related Goal</label>
+                    <select id="taskGoal">
+                        <option value="">No specific goal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taskDueDate">Due Date</label>
+                    <input type="date" id="taskDueDate">
+                </div>
+                <div class="form-group">
+                    <label for="taskPriority">Priority</label>
+                    <select id="taskPriority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelTask">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Reminder Modal -->
+    <div id="reminderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="reminderModalTitle">Add Reminder</h3>
+                <span class="close" id="closeReminderModal">&times;</span>
+            </div>
+            <form id="reminderForm">
+                <div class="form-group">
+                    <label for="reminderTitle">Reminder Title</label>
+                    <input type="text" id="reminderTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="reminderDescription">Description</label>
+                    <textarea id="reminderDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="reminderDate">Date</label>
+                    <input type="date" id="reminderDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="reminderTime">Time</label>
+                    <input type="time" id="reminderTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="reminderType">Type</label>
+                    <select id="reminderType">
+                        <option value="study">Study Session</option>
+                        <option value="deadline">Deadline</option>
+                        <option value="break">Break Time</option>
+                        <option value="review">Review Session</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelReminder">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Reminder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hidden file input for data import -->
+    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+
+    <!-- Pomodoro Timer Modal -->
+    <div id="pomodoroModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Pomodoro Timer</h3>
+                <span class="close" id="closePomodoroModal">&times;</span>
+            </div>
+            <div class="pomodoro-container">
+                <div class="timer-display" id="timerDisplay">25:00</div>
+                <div class="timer-controls">
+                    <button class="btn btn-primary" id="startTimerBtn">Start</button>
+                    <button class="btn btn-secondary" id="pauseTimerBtn" style="display: none;">Pause</button>
+                    <button class="btn btn-danger" id="resetTimerBtn">Reset</button>
+                </div>
+                <div class="timer-info">
+                    <p>Session: <span id="sessionCount">1</span> of 4</p>
+                    <p>Status: <span id="timerStatus">Focus Time</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
